@@ -1,0 +1,15 @@
+{
+  "name": "api-fetcher",
+  "version": "0.1.0",
+  "description": "fetch json files from grapevine api.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Isaac Fang",
+  "license": "MIT",
+  "dependencies": {
+    "log4js": "^0.6.14",
+    "q": "^1.0.1"
+  }
+}
