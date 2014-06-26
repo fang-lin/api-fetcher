@@ -4,6 +4,5 @@
  */
 
 module.exports = {
-    apiBaseUrl: 'http://localhost:3000/api/v1/',
-    seedsDir: 'seeds/'
+    apiBaseUrl: 'http://localhost:3000/api/v1/'
 };

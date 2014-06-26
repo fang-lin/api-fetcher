@@ -3,23 +3,22 @@
  * Author: isaac.fang@grapecity.com
  */
 
-var util = require('./utility'),
-    config = require('./config');
+var util = require('./libs/utility'),
+    config = require('./libs/config');
 
-
-var seeds = util.readSeeds(config.seedsDir + 'trees/', [
-    'bible.tree.CSB.Mat.1.json',
-    'bible.tree.CSB.Jhn.1.json',
-    'bible.tree.HCSB.Mat.1.json',
-    'bible.tree.HCSB.Jhn.1.json',
-    'bible.tree.Manuscript.Mat.1.json',
-    'bible.tree.Manuscript.Jhn.1.json',
-    'bible.tree.CSB.Mat.2.json',
-    'bible.tree.CSB.Jhn.2.json',
-    'bible.tree.HCSB.Mat.2.json',
-    'bible.tree.HCSB.Jhn.2.json',
-    'bible.tree.Manuscript.Mat.2.json',
-    'bible.tree.Manuscript.Jhn.2.json'
+var seeds = util.readJson('api/bible/tree/', [
+    'CSB.Mat.1.json',
+    'CSB.Jhn.1.json',
+    'HCSB.Mat.1.json',
+    'HCSB.Jhn.1.json',
+    'Manuscript.Mat.1.json',
+    'Manuscript.Jhn.1.json',
+    'CSB.Mat.2.json',
+    'CSB.Jhn.2.json',
+    'HCSB.Mat.2.json',
+    'HCSB.Jhn.2.json',
+    'Manuscript.Mat.2.json',
+    'Manuscript.Jhn.2.json'
 ]);
 
 var versions = {
@@ -30,9 +29,9 @@ var versions = {
 
 Object.keys(seeds).forEach(function (filename) {
     var slices = filename.split('.'),
-        mainVersion = slices[2],
-        book = slices[3],
-        chapter = slices[4];
+        mainVersion = slices[0],
+        book = slices[1],
+        chapter = slices[2];
 
     versions[mainVersion].forEach(function (subVersion) {
 
@@ -49,7 +48,7 @@ Object.keys(seeds).forEach(function (filename) {
                         if (treeIndex + 1 === trees.length &&
                             nodeIndex + 1 === nodes.length) {
 
-                            util.writeJsonToFiles('api/interlinear.parent.' + mainVersion + '.' + subVersion + '.' + book + '.' + chapter + '.json', JSON.stringify(result));
+                            util.writeJsonToFiles('api/interlinear/parent/' + mainVersion + '.' + subVersion + '.' + book + '.' + chapter + '.json', JSON.stringify(result));
                         }
                     });
             });

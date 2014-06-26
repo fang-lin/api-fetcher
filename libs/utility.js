@@ -3,7 +3,7 @@
  * Author: isaac.fang@grapecity.com
  */
 
-var http = require('http'),
+var request = require('request'),
     fs = require('fs'),
     Q = require('q'),
     logger = require('log4js').getLogger('utility');
@@ -12,17 +12,19 @@ var http = require('http'),
 
 function fetchJson(url) {
     return Q.promise(function (resolve, reject, notify) {
-        logger.trace('http.get :', url);
+        logger.trace('request :', url);
 
-        http.get(url, function (res) {
-            res.on('data', function (chunk) {
-                logger.info('http.get response:', url);
+        request(url, function (error, response, body) {
+            logger.info('request response:', url);
 
-                resolve(chunk.toString());
-            });
-        }).on('error', function (e) {
-            console.error('Can\'t http.get : ' + url, e);
-            reject(new Error('Can\'t http.get : ' + url));
+            if (!error && response.statusCode == 200) {
+
+                resolve(body);
+            } else {
+                logger.error('Can\'t XHR : ' + url, error);
+
+                reject(new Error('Can\'t XHR : ' + url));
+            }
         });
     });
 }
@@ -37,7 +39,7 @@ function writeJsonToFiles(filename, data) {
     });
 }
 
-function readSeeds(dir, files) {
+function readJson(dir, files) {
     var seeds = {};
     files.forEach(function (file) {
         seeds[file] = JSON.parse(fs.readFileSync(dir + file, 'utf8'));
@@ -67,7 +69,7 @@ function q() {
 module.exports = {
     fetchJson: fetchJson,
     writeJsonToFiles: writeJsonToFiles,
-    readSeeds: readSeeds,
+    readJson: readJson,
     treeToList: treeToList,
     q: q
 };
