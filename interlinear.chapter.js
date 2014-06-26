@@ -21,7 +21,7 @@ Object.keys(versions).forEach(function (mainVersion) {
             chapters.forEach(function (chapter) {
                 util.fetchJson(config.apiBaseUrl + 'interlinear/chapter/' + mainVersion + '/' + subVersion + '/' + book + '/' + chapter + '/0/end')
                     .then(function (chunk) {
-                        return util.writeJsonToFiles('api/interlinear/chapter/' + mainVersion + '.' + subVersion + '.' + book + '.' + chapter + '.json', chunk);
+                        return util.writeJsonToFiles('api/interlinear/chapter/' + mainVersion + '/' + subVersion + '/' + book + '/' + chapter + '/data.json', chunk);
                     });
             });
         });

@@ -15,7 +15,7 @@ versions.forEach(function (version) {
         chapters.forEach(function (chapter) {
             util.fetchJson(config.apiBaseUrl + 'bible/tree/' + version + '/' + book + '/' + chapter + '/0/end')
                 .then(function (chunk) {
-                    return util.writeJsonToFiles('api/bible/tree/' + version + '.' + book + '.' + chapter + '.json', chunk);
+                    return util.writeJsonToFiles('api/bible/tree/' + version + '/' + book + '/' + chapter + '.json', chunk);
                 });
         });
     });

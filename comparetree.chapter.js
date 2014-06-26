@@ -21,7 +21,7 @@ Object.keys(versions).forEach(function (mainVersion) {
             chapters.forEach(function (chapter) {
                 util.fetchJson(config.apiBaseUrl + 'comparetree/chapter/' + mainVersion + '/' + subVersion + '/' + book + '/' + chapter + '/0/end')
                     .then(function (chunk) {
-                        return util.writeJsonToFiles('api/comparetree/chapter/' + mainVersion + '.' + subVersion + '.' + book + '.' + chapter + '.json', chunk);
+                        return util.writeJsonToFiles('api/comparetree/chapter/' + mainVersion + '/' + subVersion + '/' + book + '/' + chapter + '.json', chunk);
                     });
             });
         });
