@@ -26,7 +26,14 @@ Object.keys(versions).forEach(function (mainVersion) {
                         hashmap = {};
 
                     nodes.forEach(function (node, index) {
-                        hashmap[node.id] = index;
+                        var tns = node.Node.tns;
+                        if (tns && tns.length > 0) {
+                            tns.forEach(function (tn) {
+                                if (tn.wn === 1) {
+                                    hashmap[tn.vn] = index;
+                                }
+                            });
+                        }
                     });
 
                     util.writeJsonToFiles('api/interlinear/chapter/' + mainVersion + '/' + subVersion + '/' + book + '/' + chapter + '/hashmap.json', JSON.stringify(hashmap));

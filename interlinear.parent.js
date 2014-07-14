@@ -7,18 +7,18 @@ var util = require('./libs/utility'),
     config = require('./libs/config');
 
 var seeds = util.readJson('api/bible/tree/', [
-    'CSB/Mat/1.json',
-    'CSB/Jhn/1.json',
-    'HCSB/Mat/1.json',
-    'HCSB/Jhn/1.json',
-    'Manuscript/Mat/1.json',
-    'Manuscript/Jhn/1.json',
-    'CSB/Mat/2.json',
-    'CSB/Jhn/2.json',
-    'HCSB/Mat/2.json',
-    'HCSB/Jhn/2.json',
-    'Manuscript/Mat/2.json',
-    'Manuscript/Jhn/2.json'
+    'CSB/Mat/1.json'
+//    'CSB/Jhn/1.json',
+//    'HCSB/Mat/1.json',
+//    'HCSB/Jhn/1.json',
+//    'Manuscript/Mat/1.json',
+//    'Manuscript/Jhn/1.json',
+//    'CSB/Mat/2.json',
+//    'CSB/Jhn/2.json',
+//    'HCSB/Mat/2.json',
+//    'HCSB/Jhn/2.json',
+//    'Manuscript/Mat/2.json',
+//    'Manuscript/Jhn/2.json'
 ]);
 
 var versions = {
@@ -45,8 +45,7 @@ Object.keys(seeds).forEach(function (filename) {
                     .then(function (chunk) {
                         result[id] = JSON.parse(chunk);
 
-                        if (treeIndex + 1 === trees.length &&
-                            nodeIndex + 1 === nodes.length) {
+                        if (treeIndex === trees.length - 1 && nodeIndex === nodes.length - 1) {
 
                             util.writeJsonToFiles('api/interlinear/parent/' + mainVersion + '/' + subVersion + '/' + book + '/' + chapter, JSON.stringify(result));
                         }
