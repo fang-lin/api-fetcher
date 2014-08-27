@@ -41,9 +41,13 @@ function writeJsonToFiles(filename, data) {
 
 function readJson(dir, files) {
     var seeds = {};
-    files.forEach(function (file) {
-        seeds[file] = JSON.parse(fs.readFileSync(dir + file, 'utf8'));
-    });
+    if (files) {
+        files.forEach(function (file) {
+            seeds[file] = JSON.parse(fs.readFileSync(dir + file, 'utf8'));
+        });
+    } else {
+        seeds = JSON.parse(fs.readFileSync(dir, 'utf8'));
+    }
     return seeds;
 }
 
